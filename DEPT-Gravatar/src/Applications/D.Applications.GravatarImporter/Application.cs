@@ -65,7 +65,8 @@ namespace D.Applications.GravatarImporter
                 {
                     if(member.Picture != null && member.Picture.Data != null && !string.IsNullOrWhiteSpace(member.Picture.Data.Url))
                     {
-                        string userEmailMD5 = _cryptographyService.CalculateMD5Hash(member.Email);
+                        string userEmail = member.Email.Trim().ToLowerInvariant();
+                        string userEmailMD5 = _cryptographyService.CalculateMD5Hash(userEmail);
                         string userEmailMD5FileName = $"{userEmailMD5}.jpg";
                         byte[] image;
                         if (!member.Picture.Data.IsSilhouette)
