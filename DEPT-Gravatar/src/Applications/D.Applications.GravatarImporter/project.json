@@ -24,7 +24,6 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.Extensions.SecretManager.Tools": "1.0.0-preview2-final",
     "Microsoft.NETCore.App": {
-      "type": "platform",
       "version": "1.0.0"
     },
     "System.IO.FileSystem": "4.0.1"
@@ -44,5 +43,9 @@
       "Gravatars"
     ]
   },
-  "userSecretsId": "netcore-D.Applications.GravatarImporter"
+  "userSecretsId": "netcore-D.Applications.GravatarImporter",
+  "runtimes": {
+    "win10-x64": {},
+    "osx.10.11-x64": {}
+  }
 }
