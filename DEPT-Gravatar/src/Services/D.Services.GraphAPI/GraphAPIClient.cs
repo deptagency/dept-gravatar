@@ -60,7 +60,8 @@ namespace D.Services.GraphAPI
             int limit = 100;
             Response<Member> response = await GetCommunityMembers(fields, limit);
             bool completed = response.Data == null || response.Data.Count < limit;
-            while(!completed)
+            members.AddRange(response.Data);
+            while (!completed)
             {
                 string cursorAfter = response.Paging.Cursors.After;
                 response = await GetMoreCommunityMembers(cursorAfter, fields, limit);
