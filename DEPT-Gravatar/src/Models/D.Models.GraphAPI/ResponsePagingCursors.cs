@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace D.Models.GraphAPI
 {
-    public class ResponsePaging
+    public class ResponsePagingCursors
     {
-        public ResponsePagingCursors Cursors { get; set; }
-        public string Next { get; set; }
+        public string Before { get; set; }
+        public string After { get; set; }
     }
 }

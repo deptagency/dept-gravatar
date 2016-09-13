@@ -23,11 +23,10 @@ namespace D.Services.GraphAPI
             _logger = loggerFactory.CreateLogger<GraphAPIClient>();
         }
 
-        public async Task<Response<Member>> GetCommunityMembers(string[] fields = null, int offset = 0, int limit = 25)
+        public async Task<Response<Member>> GetCommunityMembers(string[] fields = null, int limit = 25)
         {
             HttpClient client = getClient();
             Dictionary<string, string[]> requestParameters = new Dictionary<string, string[]>();
-            requestParameters.Add(nameof(offset), new string[] { offset.ToString() });
             requestParameters.Add(nameof(limit), new string[] { limit.ToString() });
             if(fields != null)
             {
@@ -35,6 +34,45 @@ namespace D.Services.GraphAPI
             }
             string parameters = generateQueryString(requestParameters);
             _logger.LogInformation($"Request: {this._configuration.CommunityMembersPath}{parameters} ");
+
+            return await getMembers(parameters);
+        }
+
+        public async Task<Response<Member>> GetMoreCommunityMembers(string after, string[] fields = null, int limit = 25)
+        {
+            HttpClient client = getClient();
+            Dictionary<string, string[]> requestParameters = new Dictionary<string, string[]>();
+            requestParameters.Add(nameof(limit), new string[] { limit.ToString() });
+            requestParameters.Add(nameof(after), new string[] { after.ToString() });
+            if (fields != null)
+            {
+                requestParameters.Add(nameof(fields), fields);
+            }
+            string parameters = generateQueryString(requestParameters);
+            _logger.LogInformation($"Request: {this._configuration.CommunityMembersPath}{parameters} ");
+
+            return await getMembers(parameters);
+        }
+
+        public async Task<List<Member>> GetAllCommunityMembers(string[] fields = null)
+        {
+            List<Member> members = new List<Member>();
+            int limit = 100;
+            Response<Member> response = await GetCommunityMembers(fields, limit);
+            bool completed = response.Data == null || response.Data.Count < limit;
+            while(!completed)
+            {
+                string cursorAfter = response.Paging.Cursors.After;
+                response = await GetMoreCommunityMembers(cursorAfter, fields, limit);
+                completed = response.Data == null || response.Data.Count < limit;
+                members.AddRange(response.Data);
+            }
+            return members;
+        }
+
+        private async Task<Response<Member>> getMembers(string parameters)
+        {
+            HttpClient client = getClient();
             HttpResponseMessage response = await client.GetAsync($"{this._configuration.CommunityMembersPath}{parameters}").ConfigureAwait(false);
             var message = response.Content.ReadAsStringAsync().Result;
             try
@@ -54,22 +92,6 @@ namespace D.Services.GraphAPI
                 throw new Exception(message, e);
             }
             return null;
-        }
-
-        public async Task<List<Member>> GetAllCommunityMembers(string[] fields = null)
-        {
-            List<Member> members = new List<Member>();
-            int limit = 100;
-            int offset = 0;
-            bool completed = false;
-            while(!completed)
-            {
-                Response<Member> response = await GetCommunityMembers(fields, offset, limit);
-                completed = response.Data == null || response.Data.Count < limit;
-                offset += limit;
-                members.AddRange(response.Data);
-            }
-            return members;
         }
 
         private HttpClient getClient()
