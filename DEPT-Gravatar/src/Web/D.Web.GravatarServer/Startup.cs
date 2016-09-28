@@ -41,7 +41,7 @@ namespace D.Web.GravatarServer
             app.Use(next => async context =>
             {
                 var path = context.Request.Path.Value.ToLower();
-                if (path.Contains("avatar/"))
+                if (path.Contains("avatar/") && !path.EndsWith(".jpg"))
                 {
                     context.Request.Path += ".jpg";
                 }
