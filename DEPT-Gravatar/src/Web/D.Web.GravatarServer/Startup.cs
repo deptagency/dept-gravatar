@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using D.Web.GravatarServer.Middleware.Gravatar;
 
 namespace D.Web.GravatarServer
 {
@@ -33,21 +34,17 @@ namespace D.Web.GravatarServer
                 OnPrepareResponse = context =>
                 {
                     context.Context.Response.Headers["Cache-Control"] = "no-cache";
-
                     //context.Context.Response.Headers["Expires"] = DateTime.UtcNow.AddHours(12).ToString("R");
                 }
             };
 
-            app.Use(next => async context =>
+            GravatarOptions gravatarOptions = new GravatarOptions()
             {
-                var path = context.Request.Path.Value.ToLower();
-                if (path.Contains("avatar/") && !path.EndsWith(".jpg"))
-                {
-                    context.Request.Path += ".jpg";
-                }
-                await next.Invoke(context);
-            });
-            
+                DefaultGravatarPath = "/avatar/default-avatar.jpg"
+            };
+            //Handle the /gravatar/ path and apply a not found fallback
+            app.UseGravatarMiddleware(gravatarOptions);
+
             app.UseStaticFiles(staticFileOptions);
 
             app.Run((context) =>
