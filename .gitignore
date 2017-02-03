@@ -3,3 +3,4 @@ obj/
 *.user 
 *.suo 
 publishProfiles/
+DEPT-Gravatar/src/Web/D.Web.GravatarServer/Node/node_modules/

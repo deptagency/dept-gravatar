@@ -4,8 +4,8 @@
   "dependencies": {
     "D.Models.Common": "1.0.0-*",
     "D.Models.GraphAPI": "1.0.0-*",
-    "Microsoft.Extensions.Options": "1.0.0",
-    "NETStandard.Library": "1.6.0",
+    "Microsoft.Extensions.Options": "1.1.0",
+    "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.1"
   },
 
