@@ -1,36 +1,33 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6BD12EDB-66C1-4AF7-A017-006C1B28E831}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ECB58158-E90F-434B-887D-BB574448A655}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{27CB818C-3532-4080-9F42-5C4B67576867}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "D.Applications.GravatarImporter", "src\Applications\D.Applications.GravatarImporter\D.Applications.GravatarImporter.xproj", "{79522A81-E13D-4620-86E0-9F7B0DDDAD5F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{EC3F8B24-CFB0-4826-B160-F4B670C0B185}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "D.Services.GraphAPI", "src\Services\D.Services.GraphAPI\D.Services.GraphAPI.xproj", "{B5A7AA95-9D85-4738-B318-3654F5AEC3A1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{9FEA1E2A-0F40-436E-BE62-ACE40BF1D756}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "D.Models.Common", "src\Models\D.Models.Common\D.Models.Common.xproj", "{29E91118-DD13-41E5-A5C7-9F35A08358F1}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "D.Models.GraphAPI", "src\Models\D.Models.GraphAPI\D.Models.GraphAPI.xproj", "{CF8C542B-3696-4A64-997C-B133621F9914}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "D.Services.ImageDownloader", "src\Services\D.Services.ImageDownloader\D.Services.ImageDownloader.xproj", "{1596F42D-DA65-4383-8A44-CB0065DAECB5}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "D.Services.Cryptography", "src\services\D.Services.Cryptography\D.Services.Cryptography.xproj", "{DA92F00D-756D-4DEB-840A-8AAB923FB7C7}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{FB30ED36-D6E5-4E2E-94F8-ECE2BD493C52}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "D.Web.GravatarServer", "src\Web\D.Web.GravatarServer\D.Web.GravatarServer.xproj", "{B86C9BA3-256E-447D-A379-7D5D8665F850}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D.Applications.GravatarImporter", "src\Applications\D.Applications.GravatarImporter\D.Applications.GravatarImporter.csproj", "{79522A81-E13D-4620-86E0-9F7B0DDDAD5F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D.Services.GraphAPI", "src\Services\D.Services.GraphAPI\D.Services.GraphAPI.csproj", "{B5A7AA95-9D85-4738-B318-3654F5AEC3A1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D.Models.Common", "src\Models\D.Models.Common\D.Models.Common.csproj", "{29E91118-DD13-41E5-A5C7-9F35A08358F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D.Models.GraphAPI", "src\Models\D.Models.GraphAPI\D.Models.GraphAPI.csproj", "{CF8C542B-3696-4A64-997C-B133621F9914}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D.Services.ImageDownloader", "src\Services\D.Services.ImageDownloader\D.Services.ImageDownloader.csproj", "{1596F42D-DA65-4383-8A44-CB0065DAECB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D.Services.Cryptography", "src\services\D.Services.Cryptography\D.Services.Cryptography.csproj", "{DA92F00D-756D-4DEB-840A-8AAB923FB7C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D.Web.GravatarServer", "src\Web\D.Web.GravatarServer\D.Web.GravatarServer.csproj", "{B86C9BA3-256E-447D-A379-7D5D8665F850}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,15 +69,15 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{27CB818C-3532-4080-9F42-5C4B67576867} = {6BD12EDB-66C1-4AF7-A017-006C1B28E831}
-		{79522A81-E13D-4620-86E0-9F7B0DDDAD5F} = {27CB818C-3532-4080-9F42-5C4B67576867}
 		{EC3F8B24-CFB0-4826-B160-F4B670C0B185} = {6BD12EDB-66C1-4AF7-A017-006C1B28E831}
-		{B5A7AA95-9D85-4738-B318-3654F5AEC3A1} = {EC3F8B24-CFB0-4826-B160-F4B670C0B185}
 		{9FEA1E2A-0F40-436E-BE62-ACE40BF1D756} = {6BD12EDB-66C1-4AF7-A017-006C1B28E831}
+		{FB30ED36-D6E5-4E2E-94F8-ECE2BD493C52} = {6BD12EDB-66C1-4AF7-A017-006C1B28E831}
+		{79522A81-E13D-4620-86E0-9F7B0DDDAD5F} = {27CB818C-3532-4080-9F42-5C4B67576867}
+		{B5A7AA95-9D85-4738-B318-3654F5AEC3A1} = {EC3F8B24-CFB0-4826-B160-F4B670C0B185}
 		{29E91118-DD13-41E5-A5C7-9F35A08358F1} = {9FEA1E2A-0F40-436E-BE62-ACE40BF1D756}
 		{CF8C542B-3696-4A64-997C-B133621F9914} = {9FEA1E2A-0F40-436E-BE62-ACE40BF1D756}
 		{1596F42D-DA65-4383-8A44-CB0065DAECB5} = {EC3F8B24-CFB0-4826-B160-F4B670C0B185}
 		{DA92F00D-756D-4DEB-840A-8AAB923FB7C7} = {EC3F8B24-CFB0-4826-B160-F4B670C0B185}
-		{FB30ED36-D6E5-4E2E-94F8-ECE2BD493C52} = {6BD12EDB-66C1-4AF7-A017-006C1B28E831}
 		{B86C9BA3-256E-447D-A379-7D5D8665F850} = {FB30ED36-D6E5-4E2E-94F8-ECE2BD493C52}
 	EndGlobalSection
 EndGlobal
