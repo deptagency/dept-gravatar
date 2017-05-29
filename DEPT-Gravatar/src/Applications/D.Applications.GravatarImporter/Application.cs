@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using D.Models.Google.Interfaces;
 
 namespace D.Applications.GravatarImporter
 {
@@ -17,12 +18,13 @@ namespace D.Applications.GravatarImporter
     {
         private ILogger _logger;
         private IGraphAPIService _fbClient;
+        private IGoogleAdminService _googleAdminClient;
         private IConfiguration _configuration;
         private IDownloadService _downloadService;
         private ICryptographyService _cryptographyService;
         private GravatarsConfiguration _gravatarsConfiguration;
 
-        public Application(IConfiguration configuration, IOptions<GravatarsConfiguration> gravatarsConfiguration, ILogger<Application> logger, IGraphAPIService fbClient, IDownloadService downloadService, ICryptographyService cryptographyService)
+        public Application(IConfiguration configuration, IOptions<GravatarsConfiguration> gravatarsConfiguration, ILogger<Application> logger, IGraphAPIService fbClient, IDownloadService downloadService, ICryptographyService cryptographyService, IGoogleAdminService googleAdminClient)
         {
             _logger = logger;
             _fbClient = fbClient;
@@ -30,12 +32,14 @@ namespace D.Applications.GravatarImporter
             _downloadService = downloadService;
             _cryptographyService = cryptographyService;
             _gravatarsConfiguration = gravatarsConfiguration.Value;
+            _googleAdminClient = googleAdminClient;
         }
 
         public async Task Run()
         {
             try
             {
+                
                 string[] fields = new string[] { "id", "first_name", "last_name", "email", "picture.type(large)", "link", "locale", "name", "name_format", "updated_time" };
 
                 List<Member> members = await _fbClient.GetAllCommunityMembers(fields);
@@ -61,13 +65,12 @@ namespace D.Applications.GravatarImporter
                 }
                 byte[] defaultGravatar = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), _gravatarsConfiguration.DefaultGravatarRelativePath));
                 List<string> userImageFileNames = new List<string>();
+                List<string> usersNotFoundInDirectory = new List<string>();
                 foreach (Member member in members)
                 {
                     if(member.Picture != null && member.Picture.Data != null && !string.IsNullOrWhiteSpace(member.Picture.Data.Url))
                     {
-                        string userEmail = member.Email.Trim().ToLowerInvariant();
-                        string userEmailMD5 = _cryptographyService.CalculateMD5Hash(userEmail);
-                        string userEmailMD5FileName = $"{userEmailMD5}.jpg";
+                        
                         byte[] image;
                         if (!member.Picture.Data.IsSilhouette)
                         {
@@ -78,10 +81,27 @@ namespace D.Applications.GravatarImporter
                             image = defaultGravatar;
                         }
                         
-                        string fullFileName = Path.Combine(_gravatarsConfiguration.DestinationFolder, userEmailMD5FileName);
-                        File.WriteAllBytes(fullFileName, image);
-                        _logger.LogInformation($"User {member.Email} picture has been saved as {fullFileName}");
-                        userImageFileNames.Add(userEmailMD5FileName);
+                        string facebookUserEmail = member.Email.Trim().ToLowerInvariant();
+                        IEnumerable<string> emailAliases = await _googleAdminClient.GetAccountAliases(facebookUserEmail);
+                        if(emailAliases == null)
+                        {
+                            usersNotFoundInDirectory.Add(facebookUserEmail);
+                        }
+                        List<string> emailsList = emailAliases?.ToList() ?? new List<string>();
+                        if(!emailsList.Contains(facebookUserEmail))
+                        {
+                            emailsList.Add(facebookUserEmail);
+                        }
+
+                        foreach (string userEmail in emailsList)
+                        {
+                            string userEmailMD5 = _cryptographyService.CalculateMD5Hash(userEmail);
+                            string userEmailMD5FileName = $"{userEmailMD5}.jpg";
+                            string fullFileName = Path.Combine(_gravatarsConfiguration.DestinationFolder, userEmailMD5FileName);
+                            File.WriteAllBytes(fullFileName, image);
+                            _logger.LogInformation($"User {userEmail} picture has been saved as {fullFileName}");
+                            userImageFileNames.Add(userEmailMD5FileName);
+                        }
                     }
                     else
                     {
@@ -89,6 +109,11 @@ namespace D.Applications.GravatarImporter
                     }
                 }
                 cleanUpFiles(userImageFileNames);
+                if(usersNotFoundInDirectory.Any())
+                {
+                    _logger.LogWarning($"Could not find the following address in Google directory: {string.Join(", ", usersNotFoundInDirectory)}");
+                }
+                
             }
             catch (Exception ex)
             {

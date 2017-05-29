@@ -29,6 +29,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D.Services.Cryptography", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D.Web.GravatarServer", "src\Web\D.Web.GravatarServer\D.Web.GravatarServer.csproj", "{B86C9BA3-256E-447D-A379-7D5D8665F850}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D.Services.Google", "src\services\D.Services.Google\D.Services.Google.csproj", "{5AD78127-1906-4184-BF6A-2500858320B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D.Models.Google", "src\Models\D.Models.Google\D.Models.Google.csproj", "{C5C6CCFE-4A71-4008-839D-86A8839D74FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{B86C9BA3-256E-447D-A379-7D5D8665F850}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B86C9BA3-256E-447D-A379-7D5D8665F850}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B86C9BA3-256E-447D-A379-7D5D8665F850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD78127-1906-4184-BF6A-2500858320B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD78127-1906-4184-BF6A-2500858320B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD78127-1906-4184-BF6A-2500858320B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD78127-1906-4184-BF6A-2500858320B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5C6CCFE-4A71-4008-839D-86A8839D74FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5C6CCFE-4A71-4008-839D-86A8839D74FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5C6CCFE-4A71-4008-839D-86A8839D74FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5C6CCFE-4A71-4008-839D-86A8839D74FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,5 +91,7 @@ Global
 		{1596F42D-DA65-4383-8A44-CB0065DAECB5} = {EC3F8B24-CFB0-4826-B160-F4B670C0B185}
 		{DA92F00D-756D-4DEB-840A-8AAB923FB7C7} = {EC3F8B24-CFB0-4826-B160-F4B670C0B185}
 		{B86C9BA3-256E-447D-A379-7D5D8665F850} = {FB30ED36-D6E5-4E2E-94F8-ECE2BD493C52}
+		{5AD78127-1906-4184-BF6A-2500858320B9} = {EC3F8B24-CFB0-4826-B160-F4B670C0B185}
+		{C5C6CCFE-4A71-4008-839D-86A8839D74FE} = {9FEA1E2A-0F40-436E-BE62-ACE40BF1D756}
 	EndGlobalSection
 EndGlobal
