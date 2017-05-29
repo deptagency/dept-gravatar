@@ -8,7 +8,8 @@ namespace D.Models.Common.Configuration
     public class GoogleAPIConfiguration
     {
         public string ApplicationName { get; set; }
-
-        public string ApiKey { get; set; }
+        public string ServiceAccountClientEmail { get; set; }
+        public string UserEmailImpersonate { get; set; }
+        public string ServiceAccountPrivateKey { get; set; }
     }
 }

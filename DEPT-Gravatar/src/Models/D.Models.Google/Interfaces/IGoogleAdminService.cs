@@ -7,6 +7,6 @@ namespace D.Models.Google.Interfaces
 {
     public interface IGoogleAdminService
     {
-        Task<string[]> GetAccountAliases(string email);
+        Task<IEnumerable<string>> GetAccountAliases(string email);
     }
 }
