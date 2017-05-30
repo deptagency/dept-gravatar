@@ -15,6 +15,8 @@ using D.Models.Common.Interfaces;
 using D.Services.ImageDownloader;
 using D.Services.Cryptography;
 using System.Collections;
+using D.Models.Google.Interfaces;
+using D.Services.Google;
 
 namespace D.Applications.GravatarImporter
 {
@@ -63,9 +65,11 @@ namespace D.Applications.GravatarImporter
             // Support typed Options
             services.AddOptions();
             services.Configure<GraphAPIConfiguration>(configuration.GetSection("GraphAPI"));
+            services.Configure<GoogleAPIConfiguration>(configuration.GetSection("GoogleAPI"));
             services.Configure<GravatarsConfiguration>(configuration.GetSection("Gravatars"));
 
             services.AddSingleton<IGraphAPIService, GraphAPIClient>();
+            services.AddSingleton<IGoogleAdminService, AdminAPIClient>();
             services.AddSingleton<IDownloadService, ImageDownloader>();
             services.AddSingleton<ICryptographyService, Cryptographer>();
             services.AddTransient<Application>();
