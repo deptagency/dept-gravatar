@@ -4,3 +4,4 @@ obj/
 *.suo 
 publishProfiles/
 DEPT-Gravatar/.vs/
+.vs/
