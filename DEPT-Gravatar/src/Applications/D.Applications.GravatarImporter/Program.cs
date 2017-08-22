@@ -94,7 +94,7 @@ namespace D.Applications.GravatarImporter
                 //User secrets should only be used in development but console apps do not have an environment
                 //avoid using Environment variables during development
                 //http://asp.net-hacker.rocks/2016/07/11/user-secrets-in-aspnetcore.html
-                configuration.AddUserSecrets();
+                configuration.AddUserSecrets<Program>();
             }
 
             return configuration.Build();
