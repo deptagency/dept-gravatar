@@ -24,7 +24,7 @@ namespace D.Applications.GravatarImporter
     {
         private static string environment;
         private const string defaultEnvironment = "Development";
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             environment = Environment.GetEnvironmentVariable("DEPT-GRAVATAR_Environment");
 
@@ -46,7 +46,7 @@ namespace D.Applications.GravatarImporter
 
             var app = serviceProvider.GetService<Application>();
 
-            app.Run().Wait();
+            await app.Run();
 
         }
 
